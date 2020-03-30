@@ -1,0 +1,1142 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    \usepackage{mathrsfs}
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+    \definecolor{ansi-default-inverse-fg}{HTML}{FFFFFF}
+    \definecolor{ansi-default-inverse-bg}{HTML}{000000}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatibility definitions
+    \def\gt{>}
+    \def\lt{<}
+    \let\Oldtex\TeX
+    \let\Oldlatex\LaTeX
+    \renewcommand{\TeX}{\textrm{\Oldtex}}
+    \renewcommand{\LaTeX}{\textrm{\Oldlatex}}
+    % Document parameters
+    % Document title
+    \title{The Battle of the Neighborhoods Part}
+    
+    
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{The Battle of Covid19}\label{the-battle-of-covid19}
+
+    \subsection{Introduction}\label{introduction}
+
+    Coronavirus sickness (COVID-19) is an irresistible infection brought
+about by another infection.
+
+The infection causes respiratory ailment (like this season's flu virus)
+with manifestations, for example, a hack, fever, and in progressively
+extreme cases, trouble relaxing. You can secure yourself by washing your
+hands as often as possible, abstaining from contacting your face, and
+maintaining a strategic distance from close contact (1 meter or 3 feet)
+with individuals who are unwell.
+
+    \subsection{Problem Statement}\label{problem-statement}
+
+    This Virus has spread all through the world, which caused a significant
+misfortune in human life and financial everyday practice. Besides, The
+Virus has affected in excess of 7 lacs individuals all through the world
+with recuperation pace of 2\% and 34000+ Deaths all through the world.
+The Major Countries Such as China , Itlay , US , Germany and so on have
+huge measure of paitents who are affected with Covid19.
+
+As, this Virus has caused pandamic debacle all through the world. India
+has least number of cases on the planet till now as India has played it
+safe to forestall this pandamic.
+
+We will try to figure out The most effected states in India with more
+population and least number number of center.With the Most effected
+states we will find most effected citites in that paticular states.
+
+As of Now we have least number of cases compared to rest of the
+countries. But talking about the stats we have mass number of population
+and very limited amount of reasources.Taking the worst case Senrio we
+need to expand the resources with limited number of doctors who will be
+treating the paitents.
+
+    \subsection{Goal}\label{goal}
+
+    Lets Assume, we have 800 beds accessible in the fundamental center.In
+Case if beds are completly full we need a seclusion place yet alloting
+an isloation community would help paitents however we have 10 principle
+specialists who are treating critcal just as expected paitents.
+
+Imagine a scenario where we discover the closest medical clinics or a
+seclusion community inside 1.5 to 3 km of range to such an extent that
+in time of crisis or for normal exam they can without much of a stretch
+travel inside 3 km range to numerous focuses.
+
+1.This Will assist with decreasing the quantity of passings and help
+paitents to fix quick.
+
+2.By breaking down versertile paitents, there would be more possibilty
+for their examination group to handily discover arrangement and get
+ready immunization.
+
+\paragraph{What We will Do}\label{what-we-will-do}
+
+With information driven technique
+
+1.We will Optimize the and find conceivable isloation habitats which are
+closest to our test place in the event that we unexpectedly have ascend
+in symotmatic paitents. We can designate them to that place through
+which an indvdiual specialists can assume responsibility for the
+paitents by utilizing Foursqure API.
+
+2.By Using Machine Learning we will amass the basic paitents and typical
+paitents closest to the test place inside 1.5 km of range.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{requests}
+        \PY{k+kn}{from} \PY{n+nn}{bs4} \PY{k}{import} \PY{n}{BeautifulSoup}
+        \PY{k+kn}{import} \PY{n+nn}{csv}
+        \PY{k+kn}{import} \PY{n+nn}{json}
+        \PY{k+kn}{import} \PY{n+nn}{xml}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        
+        \PY{o}{!}conda install \PYZhy{}c conda\PYZhy{}forge \PY{n+nv}{folium}\PY{o}{=}\PY{l+m}{0}.5.0 \PYZhy{}\PYZhy{}yes
+        \PY{k+kn}{import} \PY{n+nn}{folium}
+        \PY{k+kn}{from} \PY{n+nn}{folium} \PY{k}{import} \PY{n}{plugins}
+        
+        \PY{k+kn}{import} \PY{n+nn}{json}
+        \PY{k+kn}{from} \PY{n+nn}{pprint} \PY{k}{import} \PY{n}{pprint}
+        
+        \PY{o}{!}conda install \PYZhy{}c conda\PYZhy{}forge geopy \PYZhy{}\PYZhy{}yes 
+        \PY{k+kn}{from} \PY{n+nn}{geopy}\PY{n+nn}{.}\PY{n+nn}{geocoders} \PY{k}{import} \PY{n}{Nominatim} \PY{c+c1}{\PYZsh{} module to convert an address into latitude and longitude values}
+        
+        \PY{c+c1}{\PYZsh{} libraries for displaying images}
+        \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{Image} 
+        \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{core}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{HTML} 
+        
+        \PY{c+c1}{\PYZsh{} Matplotlib and associated plotting modules}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{cm} \PY{k}{as} \PY{n+nn}{cm}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{colors} \PY{k}{as} \PY{n+nn}{colors}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        
+        \PY{c+c1}{\PYZsh{} import k\PYZhy{}means from clustering stage}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{cluster} \PY{k}{import} \PY{n}{KMeans}
+        
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd} \PY{c+c1}{\PYZsh{} library for data analsysis}
+        \PY{n}{pd}\PY{o}{.}\PY{n}{set\PYZus{}option}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{display.max\PYZus{}columns}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{k+kc}{None}\PY{p}{)}
+        \PY{n}{pd}\PY{o}{.}\PY{n}{set\PYZus{}option}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{display.max\PYZus{}rows}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{k+kc}{None}\PY{p}{)}
+        
+        \PY{k+kn}{import} \PY{n+nn}{json} \PY{c+c1}{\PYZsh{} library to handle JSON files}
+        \PY{k+kn}{import} \PY{n+nn}{requests} \PY{c+c1}{\PYZsh{} library to handle requests}
+        \PY{k+kn}{from} \PY{n+nn}{pandas}\PY{n+nn}{.}\PY{n+nn}{io}\PY{n+nn}{.}\PY{n+nn}{json} \PY{k}{import} \PY{n}{json\PYZus{}normalize} \PY{c+c1}{\PYZsh{} tranform JSON file into a pandas dataframe}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Solving environment: done
+
+\# All requested packages already installed.
+
+Solving environment: done
+
+\# All requested packages already installed.
+
+
+    \end{Verbatim}
+
+    \subsection{Working with Test Center Data
+Set}\label{working-with-test-center-data-set}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{url}\PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://docs.google.com/spreadsheets/d/1vvhdhxNPlEqIZxfQiSGmYCnNf6WB37vhXo3P5W08CQE/edit?usp=sharing}\PY{l+s+s1}{\PYZsq{}}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{data} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://docs.google.com/spreadsheets/d/e/2PACX\PYZhy{}1vTowbPbWhuIRQgVzJR0mVcFv4nG59m5JAOcSCGbaTOm3LO9g0ORIJgxAiqDPBk6Y71e2nTukwj2spsG/pub?output=csv}\PY{l+s+s1}{\PYZsq{}}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{n}{file} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{data}\PY{p}{,}\PY{n}{sep}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{,}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} use sep=\PYZdq{},\PYZdq{} for coma separation. }
+        \PY{n}{file}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:}         Latitude  Longitude
+        count  62.000000  62.000000
+        mean   21.574865  80.200249
+        std     7.136525   6.287965
+        min     8.485500  72.114700
+        25\%    14.966342  76.176767
+        50\%    23.139585  77.640610
+        75\%    26.839086  82.076485
+        max    34.141700  94.908370
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{file} \PY{o}{=} \PY{n}{file}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{file}\PY{o}{.}\PY{n}{index}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{n}{file}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}52}]:}             State                                      TestCenter  \textbackslash{}
+         1  ANDHRA PRADESH  Sri Venkateswara Institute of Medical Sciences   
+         2  ANDHRA PRADESH                          Andhra Medical College   
+         3  ANDHRA PRADESH                                             GMC   
+         4  ANDHRA PRADESH                       Sidhartha Medical College   
+         5  ANDHRA PRADESH                       Rangaraya Medical College   
+         
+                     City   Latitude  Longitude  
+         1       Tirupati  22.467370  88.378590  
+         2  Visakhapatnam  15.821800  78.038840  
+         3      Anantapur  14.681190  77.596700  
+         4     Vijayawada  16.491640  80.690150  
+         5       Kakinada  20.474449  85.888367  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{file}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+Int64Index: 62 entries, 1 to 62
+Data columns (total 5 columns):
+State         62 non-null object
+TestCenter    62 non-null object
+City          62 non-null object
+Latitude      62 non-null float64
+Longitude     62 non-null float64
+dtypes: float64(2), object(3)
+memory usage: 2.9+ KB
+
+    \end{Verbatim}
+
+    \subsection{Ploting Test Center Using Geolocator and
+Folium}\label{ploting-test-center-using-geolocator-and-folium}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{address} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{India}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{geolocator} \PY{o}{=} \PY{n}{Nominatim}\PY{p}{(}\PY{n}{user\PYZus{}agent}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{my\PYZus{}app}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{location} \PY{o}{=} \PY{n}{geolocator}\PY{o}{.}\PY{n}{geocode}\PY{p}{(}\PY{n}{address}\PY{p}{)}
+        \PY{n}{latitude} \PY{o}{=} \PY{n}{location}\PY{o}{.}\PY{n}{latitude}
+        \PY{n}{longitude} \PY{o}{=} \PY{n}{location}\PY{o}{.}\PY{n}{longitude}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The geograpical coordinate are }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{, }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{latitude}\PY{p}{,} \PY{n}{longitude}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The geograpical coordinate are 22.3511148, 78.6677428.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}53}]:} \PY{n}{map\PYZus{}test\PYZus{}center} \PY{o}{=} \PY{n}{folium}\PY{o}{.}\PY{n}{Map}\PY{p}{(}\PY{n}{location}\PY{o}{=}\PY{p}{[}\PY{n}{latitude}\PY{p}{,} \PY{n}{longitude}\PY{p}{]}\PY{p}{,} \PY{n}{zoom\PYZus{}start}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} add markers to map}
+         \PY{k}{for} \PY{n}{lat}\PY{p}{,} \PY{n}{lng}\PY{p}{,} \PY{n}{label} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{file}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Latitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{file}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Longitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{file}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{TestCenter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+             \PY{n}{label} \PY{o}{=} \PY{n}{folium}\PY{o}{.}\PY{n}{Popup}\PY{p}{(}\PY{n}{label}\PY{p}{,} \PY{n}{parse\PYZus{}html}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+             \PY{n}{folium}\PY{o}{.}\PY{n}{CircleMarker}\PY{p}{(}
+                 \PY{p}{[}\PY{n}{lat}\PY{p}{,} \PY{n}{lng}\PY{p}{]}\PY{p}{,}
+                 \PY{n}{radius}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,}
+                 \PY{n}{popup}\PY{o}{=}\PY{n}{label}\PY{p}{,}
+                 \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{orange}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{n}{fill}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}
+                 \PY{n}{fill\PYZus{}color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yellow}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{n}{fill\PYZus{}opacity}\PY{o}{=}\PY{l+m+mf}{0.7}\PY{p}{,}
+                 \PY{n}{parse\PYZus{}html}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{add\PYZus{}to}\PY{p}{(}\PY{n}{map\PYZus{}test\PYZus{}center}\PY{p}{)}  
+             
+         \PY{n}{map\PYZus{}test\PYZus{}center}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{map\PYZus{}test\PYZus{}center.png}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{n}{map\PYZus{}test\PYZus{}center}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}54}]:} <folium.folium.Map at 0x7f8a1b6bc1d0>
+\end{Verbatim}
+            
+    \subsection{Finding out which state has most population
+Population}\label{finding-out-which-state-has-most-population-population}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{url\PYZus{}list} \PY{o}{=} \PY{n}{requests}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://en.wikipedia.org/wiki/List\PYZus{}of\PYZus{}states\PYZus{}and\PYZus{}union\PYZus{}territories\PYZus{}of\PYZus{}India\PYZus{}by\PYZus{}population\PYZsh{}List}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{text}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{n}{soup} \PY{o}{=} \PY{n}{BeautifulSoup}\PY{p}{(}\PY{n}{url\PYZus{}list}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lxml}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{wiki\PYZus{}extract} \PY{o}{=} \PY{n}{soup}\PY{o}{.}\PY{n}{find}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{table}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{class\PYZus{}} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wikitable sortable}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{wiki\PYZus{}table\PYZus{}rows} \PY{o}{=} \PY{n}{wiki\PYZus{}extract}\PY{o}{.}\PY{n}{find\PYZus{}all}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tr}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{information} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n}{wiki\PYZus{}table\PYZus{}rows}\PY{p}{:}
+             \PY{n}{info} \PY{o}{=} \PY{n}{row}\PY{o}{.}\PY{n}{text}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+             \PY{n}{information}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{info}\PY{p}{)}
+             
+         \PY{n}{state\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{information}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{state\PYZus{}df} \PY{o}{=} \PY{n}{state\PYZus{}df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{state\PYZus{}df}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{17}\PY{p}{,} \PY{l+m+mi}{18}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)} 
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{state\PYZus{}df}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{n}{state\PYZus{}df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{state\PYZus{}df} \PY{o}{=} \PY{n}{state\PYZus{}df}\PY{o}{.}\PY{n}{reindex}\PY{p}{(}\PY{n}{state\PYZus{}df}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{drop}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{state\PYZus{}df}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{name} \PY{o}{=} \PY{k+kc}{None}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}58}]:} \PY{n}{state\PYZus{}df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}58}]:}     State or union territory            Population(\%)    \textbackslash{}
+         0              Uttar Pradesh      199,812,341(16.51\%)     
+         1                Maharashtra       112,374,333(9.28\%)     
+         2                      Bihar        104,099,452(8.6\%)     
+         3                West Bengal        91,276,115(7.54\%)     
+         4             Madhya Pradesh           72,626,809(6\%)     
+         5                 Tamil Nadu        72,147,030(5.96\%)     
+         6                  Rajasthan        68,548,437(5.66\%)     
+         7                  Karnataka        61,095,297(5.05\%)     
+         8                    Gujarat        60,439,692(4.99\%)     
+         9             Andhra Pradesh    49,577,103[b] (4.08\%)     
+         
+           Decadal growth(2001–2011)       Rural population(\%)   Urban population(\%)    \textbackslash{}
+         0                     20.2\%       155,317,278(77.73\%)    44,495,063(22.27\%)     
+         1                     20.0\%        61,556,074(54.78\%)    50,818,259(45.22\%)     
+         2                        25  .4\%                         92,341,436(88.71\%)     
+         3                     13.8\%        62,183,113(68.13\%)    29,093,002(31.87\%)     
+         4                     16.3\%        52,557,404(72.37\%)    20,069,405(27.63\%)     
+         5                     15.6\%         37,229,590(51.6\%)     34,917,440(48.4\%)     
+         6                     21.3\%        51,500,352(75.13\%)    17,048,085(24.87\%)     
+         7                     15.6\%        37,469,335(61.33\%)    23,625,962(38.67\%)     
+         8                     19.3\%         34,694,609(57.4\%)     25,745,083(42.6\%)     
+         9                     11.0\%        34,966,693(70.53\%)    14,610,410(29.47\%)     
+         
+                               Area[16]                   Density[a]    \textbackslash{}
+         0   240,928 km2 (93,023 sq mi)        828/km2 (2,140/sq mi)     
+         1  307,713 km2 (118,809 sq mi)          365/km2 (950/sq mi)     
+         2           11,758,016(11.29\%)    94,163 km2 (36,357 sq mi)     
+         3    88,752 km2 (34,267 sq mi)      1,029/km2 (2,670/sq mi)     
+         4  308,245 km2 (119,014 sq mi)          236/km2 (610/sq mi)     
+         5   130,058 km2 (50,216 sq mi)        555/km2 (1,440/sq mi)     
+         6  342,239 km2 (132,139 sq mi)          201/km2 (520/sq mi)     
+         7   191,791 km2 (74,051 sq mi)          319/km2 (830/sq mi)     
+         8   196,024 km2 (75,685 sq mi)          308/km2 (800/sq mi)     
+         9   162,968 km2 (62,922 sq mi)          303/km2 (780/sq mi)     
+         
+                          Sex ratio  
+         0                      912  
+         1                      929  
+         2  1,102/km2 (2,850/sq mi)  
+         3                      953  
+         4                      931  
+         5                      996  
+         6                      928  
+         7                      973  
+         8                      919  
+         9                      993  
+\end{Verbatim}
+            
+    UP, Maharastra and Bihar are the three states with most population.
+
+    \subsection{Finding Out Which State is highly
+Infected}\label{finding-out-which-state-is-highly-infected}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{covid\PYZus{}case} \PY{o}{=} \PY{n}{requests}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{https://www.mohfw.gov.in}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{text}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}59}]:} \PY{n}{soup} \PY{o}{=} \PY{n}{BeautifulSoup}\PY{p}{(}\PY{n}{covid\PYZus{}case}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lxml}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{wiki\PYZus{}covid} \PY{o}{=} \PY{n}{soup}\PY{o}{.}\PY{n}{find}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{div}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{id} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cases}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{covid\PYZus{}table\PYZus{}rows} \PY{o}{=} \PY{n}{wiki\PYZus{}covid}\PY{o}{.}\PY{n}{find\PYZus{}all}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tr}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{covid\PYZus{}information} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n}{covid\PYZus{}table\PYZus{}rows}\PY{p}{:}
+             \PY{n}{info} \PY{o}{=} \PY{n}{row}\PY{o}{.}\PY{n}{text}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            
+             \PY{n}{covid\PYZus{}information}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{info}\PY{p}{)}
+             
+         \PY{n}{covid\PYZus{}information}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:} [['',
+           'S. No.',
+           'Name of State / UT',
+           'Total Confirmed cases *',
+           '',
+           'Cured/Discharged/Migrated',
+           'Death',
+           ''],
+          ['', '1', 'Andhra Pradesh', '19', '', '1', '0', ''],
+          ['', '2', 'Andaman and Nicobar Islands', '9', '', '0', '0', ''],
+          ['', '3', 'Bihar', '11', '', '0', '1', ''],
+          ['', '4', 'Chandigarh', '8', '', '0', '0', ''],
+          ['', '5', 'Chhattisgarh', '7', '', '0', '0', ''],
+          ['', '6', 'Delhi', '53', '', '6', '2', ''],
+          ['', '7', 'Goa', '5', '', '0', '0', ''],
+          ['', '8', 'Gujarat', '58', '', '1', '5', ''],
+          ['', '9', 'Haryana', '33', '', '17', '0', ''],
+          ['', '10', 'Himachal Pradesh', '3', '', '0', '1', ''],
+          ['', '11', 'Jammu and Kashmir', '31', '', '1', '2', ''],
+          ['', '12', 'Karnataka', '80', '', '5', '3', ''],
+          ['', '13', 'Kerala', '194', '', '19', '1', ''],
+          ['', '14', 'Ladakh', '13', '', '3', '0', ''],
+          ['', '15', 'Madhya Pradesh', '33', '', '0', '2', ''],
+          ['', '16', 'Maharashtra', '193', '', '25', '8', ''],
+          ['', '17', 'Manipur', '1', '', '0', '0', ''],
+          ['', '18', 'Mizoram', '1', '', '0', '0', ''],
+          ['', '19', 'Odisha', '3', '', '0', '0', ''],
+          ['', '20', 'Puducherry', '1', '', '0', '0', ''],
+          ['', '21', 'Punjab', '38', '', '1', '1', ''],
+          ['', '22', 'Rajasthan', '57', '', '3', '0', ''],
+          ['', '23', 'Tamil Nadu', '50', '', '4', '1', ''],
+          ['', '24', 'Telengana', '69', '', '1', '1', ''],
+          ['', '25', 'Uttarakhand', '7', '', '2', '0', ''],
+          ['', '26', 'Uttar Pradesh', '75', '', '11', '0', ''],
+          ['', '27', 'West Bengal', '19', '', '0', '1', ''],
+          ['',
+           'Total number of confirmed cases in India',
+           '1071',
+           '',
+           '',
+           '100',
+           '',
+           '',
+           '29',
+           '',
+           '']]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{covid\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{covid\PYZus{}information}\PY{p}{)}
+         \PY{n}{covid\PYZus{}df} \PY{o}{=} \PY{n}{covid\PYZus{}df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{covid\PYZus{}df}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{9}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)} 
+         
+         \PY{n}{covid\PYZus{}df}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{n}{covid\PYZus{}df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{covid\PYZus{}df} \PY{o}{=} \PY{n}{covid\PYZus{}df}\PY{o}{.}\PY{n}{reindex}\PY{p}{(}\PY{n}{covid\PYZus{}df}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{drop}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{covid\PYZus{}df}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{name} \PY{o}{=} \PY{k+kc}{None}
+         
+         \PY{n}{covid\PYZus{}df} \PY{o}{=} \PY{n}{covid\PYZus{}df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{covid\PYZus{}df}\PY{o}{.}\PY{n}{index}\PY{p}{[}\PY{l+m+mi}{27}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}60}]:} \PY{n}{covid\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Total Confirmed cases *}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{covid\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Total Confirmed cases *}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}
+         \PY{n}{covid\PYZus{}df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}60}]:}   S. No.           Name of State / UT  Total Confirmed cases *    \textbackslash{}
+         0      1               Andhra Pradesh                       19     
+         1      2  Andaman and Nicobar Islands                        9     
+         2      3                        Bihar                       11     
+         3      4                   Chandigarh                        8     
+         4      5                 Chhattisgarh                        7     
+         5      6                        Delhi                       53     
+         6      7                          Goa                        5     
+         7      8                      Gujarat                       58     
+         8      9                      Haryana                       33     
+         9     10             Himachal Pradesh                        3     
+         
+           Cured/Discharged/Migrated Death  
+         0                         1     0  
+         1                         0     0  
+         2                         0     1  
+         3                         0     0  
+         4                         0     0  
+         5                         6     2  
+         6                         0     0  
+         7                         1     5  
+         8                        17     0  
+         9                         0     1  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+         \PY{n}{plt}\PY{o}{.}\PY{n}{style}\PY{o}{.}\PY{n}{use}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ggplot}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{my\PYZus{}colors} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rgbkymc}\PY{l+s+s1}{\PYZsq{}}
+         
+         \PY{n}{covid\PYZus{}df2} \PY{o}{=} \PY{n}{covid\PYZus{}df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Name of State / UT}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Total Confirmed cases *}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Total Confirmed cases *}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ascending} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{index} \PY{o}{=} \PY{n}{covid\PYZus{}df2}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Name of State / UT}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{inplace} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{bar} \PY{o}{=} \PY{n}{covid\PYZus{}df2}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)} \PY{p}{,}\PY{n}{color}\PY{o}{=}\PY{n}{my\PYZus{}colors}\PY{p}{,} \PY{n}{legend} \PY{o}{=} \PY{k+kc}{None}\PY{p}{)}
+         \PY{n}{bar}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{yticks}\PY{p}{(}\PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{14}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{index}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{,} \PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{90}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{States}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Cases}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{State wise Total Confirmed cases}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{25}\PY{p}{)}
+         
+         \PY{n}{bar}\PY{o}{.}\PY{n}{spines}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{top}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}visible}\PY{p}{(}\PY{k+kc}{False}\PY{p}{)}
+         \PY{n}{bar}\PY{o}{.}\PY{n}{spines}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{right}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}visible}\PY{p}{(}\PY{k+kc}{False}\PY{p}{)}
+         \PY{n}{bar}\PY{o}{.}\PY{n}{spines}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bottom}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}linewidth}\PY{p}{(}\PY{l+m+mf}{0.5}\PY{p}{)}
+         \PY{n}{bar}\PY{o}{.}\PY{n}{spines}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}visible}\PY{p}{(}\PY{k+kc}{True}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{savefig}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{covid\PYZus{}read.png}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_34_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    
+    \begin{verbatim}
+<Figure size 432x288 with 0 Axes>
+    \end{verbatim}
+
+    
+    Kerala and Maharashtra are two states which are highly effected with
+190+ Cases. But We will choose Maharashtra because,
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Maharastra has secound highest Population in the country
+\item
+  It has only two test Centers
+\end{enumerate}
+
+    \subsection{Finding Out which city is most
+infected}\label{finding-out-which-city-is-most-infected}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{mh\PYZus{}data} \PY{o}{=} \PY{n}{requests}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://en.wikipedia.org/wiki/2020\PYZus{}coronavirus\PYZus{}pandemic\PYZus{}in\PYZus{}Maharashtra\PYZsh{}Statistics}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{text}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}61}]:} \PY{n}{soup} \PY{o}{=} \PY{n}{BeautifulSoup}\PY{p}{(}\PY{n}{mh\PYZus{}data}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lxml}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{wiki\PYZus{}mh} \PY{o}{=} \PY{n}{soup}\PY{o}{.}\PY{n}{find}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{table}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{class\PYZus{}} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wikitable}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{mh\PYZus{}table\PYZus{}rows} \PY{o}{=} \PY{n}{wiki\PYZus{}mh}\PY{o}{.}\PY{n}{find\PYZus{}all}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tr}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{mh\PYZus{}information} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n}{mh\PYZus{}table\PYZus{}rows}\PY{p}{:}
+             \PY{n}{info} \PY{o}{=} \PY{n}{row}\PY{o}{.}\PY{n}{text}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            
+             \PY{n}{mh\PYZus{}information}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{info}\PY{p}{)}
+             
+         \PY{n}{mh\PYZus{}information}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}26}]:} [['', 'District', '', 'Total cases', '', 'Deaths', '', 'Notes', ''],
+          ['', 'Mumbai City + Mumbai Suburban', '', '88', '', '6', '', '', ''],
+          ['',
+           'Thane',
+           '',
+           '18',
+           '',
+           '1',
+           '',
+           'Kalyan-Dombivli (7), Navi Mumbai (6), Thane (5), Ulhasnagar (1)',
+           ''],
+          ['', 'Palghar', '', '5', '', '0', '', ' Vasai-Virar (4), Palghar (1)', ''],
+          ['', 'Raigad', '', '2', '', '0', '', 'Panvel (2)', ''],
+          ['', 'Total in Mumbai Metropolitan Region', '', '113', '', '7', '', '', ''],
+          ['', 'Pune', '', '42', '', '0', '', '', ''],
+          ['', 'Sangli', '', '25', '', '0', '', '', ''],
+          ['', 'Nagpur', '', '16', '', '0', '', '', ''],
+          ['', 'Ahmednagar', '', '5', '', '0', '', '', ''],
+          ['', 'Yavatmal', '', '4', '', '0', '', '', ''],
+          ['', 'Kolhapur', '', '2', '', '0', '', '', ''],
+          ['', 'Satara', '', '2', '', '0', '', '', ''],
+          ['', 'Aurangabad', '', '1', '', '0', '', '', ''],
+          ['', 'Buldhana', '', '1', '', '1', '', '', ''],
+          ['', 'Gondia', '', '1', '', '0', '', '', ''],
+          ['', 'Jalgaon', '', '1', '', '0', '', '', ''],
+          ['', 'Nashik', '', '1', '', '0', '', '', ''],
+          ['', 'Ratnagiri', '', '1', '', '0', '', '', ''],
+          ['', 'Sindhudurg', '', '1', '', '0', '', '', ''],
+          ['', 'Total (all districts)', '', '215', '', '8', '', '', ''],
+          ['', 'As of 30 March 2020[70]', '']]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{mh\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{mh\PYZus{}information}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+         \PY{n}{mh\PYZus{}df}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{n}{mh\PYZus{}df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{mh\PYZus{}df} \PY{o}{=} \PY{n}{mh\PYZus{}df}\PY{o}{.}\PY{n}{reindex}\PY{p}{(}\PY{n}{mh\PYZus{}df}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{drop}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{mh\PYZus{}df}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{name} \PY{o}{=} \PY{k+kc}{None}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}62}]:} \PY{n}{mh\PYZus{}df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}62}]:}                                 District   Total cases   Deaths    \textbackslash{}
+         0          Mumbai City + Mumbai Suburban            88        6     
+         1                                  Thane            18        1     
+         2                                Palghar             5        0     
+         3                                 Raigad             2        0     
+         4    Total in Mumbai Metropolitan Region           113        7     
+         5                                   Pune            42        0     
+         6                                 Sangli            25        0     
+         7                                 Nagpur            16        0     
+         8                             Ahmednagar             5        0     
+         9                               Yavatmal             4        0     
+         
+                                                        Notes    
+         0                                                       
+         1  Kalyan-Dombivli (7), Navi Mumbai (6), Thane (5{\ldots}    
+         2                       Vasai-Virar (4), Palghar (1)    
+         3                                         Panvel (2)    
+         4                                                       
+         5                                                       
+         6                                                       
+         7                                                       
+         8                                                       
+         9                                                       
+\end{Verbatim}
+            
+    As We know, Maharastra has second highest population and second highest
+Infected State in the Country with least number of Test Center. We will
+Pick up Mumbai(As we know Mumbai is very densly populated with highest
+number 0f cases) and we will try to impliment solutions.
+
+    \subsection{Accessing Four Square API}\label{accessing-four-square-api}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{CLIENT\PYZus{}ID} \PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C1BB50HNQVJUNJBXQ2PDTEFSOX1SGJGLIEEJPYFFXADJH313}\PY{l+s+s1}{\PYZsq{}} \PY{c+c1}{\PYZsh{} portion hidden from view\PYZsq{} \PYZsh{} your Foursquare ID}
+         \PY{n}{CLIENT\PYZus{}SECRET} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{30QKDGXPGJOCSKRETYN4G1CFQHVGZXBWNHSU3DSUTZ5QPAHL}\PY{l+s+s1}{\PYZsq{}}\PY{c+c1}{\PYZsh{} portion hidden from view\PYZsq{} \PYZsh{} your Foursquare Secret}
+         \PY{n}{VERSION} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{20180604}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{LIMIT} \PY{o}{=} \PY{l+m+mi}{50}
+         \PY{n}{radius} \PY{o}{=} \PY{l+m+mi}{2000}
+         \PY{n}{categoryId} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{4bf58dd8d48988d196941735}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Your credentails:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CLIENT\PYZus{}ID: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{CLIENT\PYZus{}ID}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CLIENT\PYZus{}SECRET:}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{CLIENT\PYZus{}SECRET}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Your credentails:
+CLIENT\_ID: C1BB50HNQVJUNJBXQ2PDTEFSOX1SGJGLIEEJPYFFXADJH313
+CLIENT\_SECRET:30QKDGXPGJOCSKRETYN4G1CFQHVGZXBWNHSU3DSUTZ5QPAHL
+
+    \end{Verbatim}
+
+    \subsection{Getting Near by Hospltals within 2.5 km of
+range}\label{getting-near-by-hospltals-within-2.5-km-of-range}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{mum\PYZus{}lat} \PY{o}{=} \PY{l+m+mf}{18.98546}
+         \PY{n}{mum\PYZus{}long} \PY{o}{=} \PY{l+m+mf}{72.83132}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{url} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://api.foursquare.com/v2/venues/search?\PYZam{}client\PYZus{}id=}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZam{}client\PYZus{}secret=}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZam{}v=}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZam{}categoryId=}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZam{}ll=}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{,}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZam{}radius=}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZam{}limit=}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}
+             \PY{n}{CLIENT\PYZus{}ID}\PY{p}{,} 
+             \PY{n}{CLIENT\PYZus{}SECRET}\PY{p}{,} 
+             \PY{n}{VERSION}\PY{p}{,}
+             \PY{n}{categoryId}\PY{p}{,}
+             \PY{n}{mum\PYZus{}lat}\PY{p}{,} 
+             \PY{n}{mum\PYZus{}long}\PY{p}{,} 
+             \PY{n}{radius}\PY{p}{,} 
+             \PY{n}{LIMIT}\PY{p}{)}
+         \PY{n}{url}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}31}]:} 'https://api.foursquare.com/v2/venues/search?\&client\_id=C1BB50HNQVJUNJBXQ2PDTEFSOX1SGJGLIEEJPYFFXADJH313\&client\_secret=30QKDGXPGJOCSKRETYN4G1CFQHVGZXBWNHSU3DSUTZ5QPAHL\&v=20180604\&categoryId=4bf58dd8d48988d196941735\&ll=18.98546,72.83132\&radius=2000\&limit=50'
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n}{venues\PYZus{}list}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+         
+         \PY{n}{results} \PY{o}{=}  \PY{n}{requests}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{n}{url}\PY{p}{)}\PY{o}{.}\PY{n}{json}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{response}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{venues}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{venues\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{p}{(}
+                     \PY{n}{v}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                     \PY{n}{v}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{location}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                     \PY{n}{v}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{location}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lng}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                     \PY{n}{v}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{location}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{distance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{v} \PY{o+ow}{in} \PY{n}{results}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{nearby\PYZus{}venues} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{[}\PY{n}{venues} \PY{k}{for} \PY{n}{venue\PYZus{}list} \PY{o+ow}{in} \PY{n}{venues\PYZus{}list} \PY{k}{for} \PY{n}{venues} \PY{o+ow}{in} \PY{n}{venue\PYZus{}list}\PY{p}{]}\PY{p}{)}
+         \PY{n}{nearby\PYZus{}venues}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Near by Hospitals}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                           \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Latitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                          \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Longitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Distance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{nearby\PYZus{}venues} \PY{o}{=}  \PY{n}{nearby\PYZus{}venues}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{p}{)}
+         \PY{n}{nearby\PYZus{}venues} \PY{o}{=}  \PY{n}{nearby\PYZus{}venues}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{drop}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}63}]:} \PY{n}{nearby\PYZus{}venues}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}63}]:}                          Near by Hospitals   Latitude  Longitude  Distance  \textbackslash{}
+         0                         Nirmala Hospital  18.984812  72.830059       151   
+         1                       kasturbha hospital  18.980616  72.829620       568   
+         2  Dr Babasaheb Ambedkar Memorial Hospital  18.979982  72.833486       651   
+         3                        Dr B A M Hospital  18.979415  72.834303       742   
+         4                  Wellspring, Lower Parel  18.977779  72.827191       959   
+         
+            Cluster  
+         0        0  
+         1        0  
+         2        0  
+         3        0  
+         4        0  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{There are }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{ hospitals within 2.5 km of range.}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{nearby\PYZus{}venues}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Near by Hospitals}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are 22 hospitals within 2.5 km of range.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}64}]:} \PY{n}{nearby\PYZus{}venues} \PY{o}{=} \PY{n}{nearby\PYZus{}venues}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by} \PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Distance}\PY{l+s+s1}{\PYZsq{}} \PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{nearby\PYZus{}venues} \PY{o}{=}  \PY{n}{nearby\PYZus{}venues}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{drop}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{nearby\PYZus{}venues}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}64}]:}                          Near by Hospitals   Latitude  Longitude  Distance  \textbackslash{}
+         0                         Nirmala Hospital  18.984812  72.830059       151   
+         1                       kasturbha hospital  18.980616  72.829620       568   
+         2  Dr Babasaheb Ambedkar Memorial Hospital  18.979982  72.833486       651   
+         3                        Dr B A M Hospital  18.979415  72.834303       742   
+         4                  Wellspring, Lower Parel  18.977779  72.827191       959   
+         5            King George Memorial Hospital  18.989853  72.823441       962   
+         6                            Niar hospital  18.976120  72.827176      1127   
+         7                 Masina Hospital, Byculla  18.974487  72.836080      1320   
+         8                 Maru Charitable Hospital  18.997197  72.836956      1434   
+         9                            Nair Hospital  18.973648  72.822754      1594   
+         
+            Cluster  
+         0        0  
+         1        0  
+         2        0  
+         3        0  
+         4        0  
+         5        0  
+         6        0  
+         7        1  
+         8        1  
+         9        1  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n}{nearby\PYZus{}venues}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Distance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{nearest\PYZus{}distance} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{nearby\PYZus{}venues}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Distance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{\PYZgt{}}\PY{o}{=}\PY{l+m+mi}{1489}\PY{p}{)}
+         
+         \PY{n}{mild\PYZus{}distance} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{nearby\PYZus{}venues}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Distance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{1489}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Nearest within 1.5 km to center:}\PY{l+s+s1}{\PYZsq{}} \PY{p}{,}\PY{n}{nearest\PYZus{}distance}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Nearest between 1.5 to 2.5 km center:}\PY{l+s+s1}{\PYZsq{}} \PY{p}{,}\PY{n}{mild\PYZus{}distance}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Nearest within 1.5 km to center: 13
+Nearest between 1.5 to 2.5 km center: 9
+
+    \end{Verbatim}
+
+    \subsection{Using K means algorithum to group nearby
+places}\label{using-k-means-algorithum-to-group-nearby-places}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{n}{kclusters} \PY{o}{=} \PY{l+m+mi}{3}
+         
+         \PY{n}{nearby\PYZus{}venues\PYZus{}clustering} \PY{o}{=} \PY{n}{nearby\PYZus{}venues}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Near by Hospitals}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} run k\PYZhy{}means clustering}
+         \PY{n}{kmeans} \PY{o}{=} \PY{n}{KMeans}\PY{p}{(}\PY{n}{n\PYZus{}clusters}\PY{o}{=}\PY{n}{kclusters}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{nearby\PYZus{}venues\PYZus{}clustering}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} check cluster labels generated for each row in the dataframe}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{kmeans}\PY{o}{.}\PY{n}{labels\PYZus{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{kmeans}\PY{o}{.}\PY{n}{labels\PYZus{}}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2]
+22
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{n}{nearby\PYZus{}venues\PYZus{}merge} \PY{o}{=} \PY{n}{nearby\PYZus{}venues}
+         
+         \PY{n}{nearby\PYZus{}venues}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cluster}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{kmeans}\PY{o}{.}\PY{n}{labels\PYZus{}}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}65}]:} \PY{n}{nearby\PYZus{}venues}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}65}]:}                          Near by Hospitals   Latitude  Longitude  Distance  \textbackslash{}
+         0                         Nirmala Hospital  18.984812  72.830059       151   
+         1                       kasturbha hospital  18.980616  72.829620       568   
+         2  Dr Babasaheb Ambedkar Memorial Hospital  18.979982  72.833486       651   
+         3                        Dr B A M Hospital  18.979415  72.834303       742   
+         4                  Wellspring, Lower Parel  18.977779  72.827191       959   
+         
+            Cluster  
+         0        0  
+         1        0  
+         2        0  
+         3        0  
+         4        0  
+\end{Verbatim}
+            
+    \subsection{Plotting Map}\label{plotting-map}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}66}]:} \PY{n}{map\PYZus{}clusters} \PY{o}{=} \PY{n}{folium}\PY{o}{.}\PY{n}{Map}\PY{p}{(}\PY{n}{location}\PY{o}{=}\PY{p}{[}\PY{n}{mum\PYZus{}lat}\PY{p}{,} \PY{n}{mum\PYZus{}long}\PY{p}{]}\PY{p}{,} \PY{n}{zoom\PYZus{}start}\PY{o}{=}\PY{l+m+mi}{14}\PY{p}{)}
+         
+         
+         \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{kclusters}\PY{p}{)}
+         \PY{n}{ys} \PY{o}{=} \PY{p}{[}\PY{n}{i}\PY{o}{+}\PY{n}{x}\PY{o}{+}\PY{p}{(}\PY{n}{i}\PY{o}{*}\PY{n}{x}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{kclusters}\PY{p}{)}\PY{p}{]}
+         \PY{n}{colors\PYZus{}array} \PY{o}{=} \PY{n}{cm}\PY{o}{.}\PY{n}{rainbow}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{ys}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n}{rainbow} \PY{o}{=} \PY{p}{[}\PY{n}{colors}\PY{o}{.}\PY{n}{rgb2hex}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{colors\PYZus{}array}\PY{p}{]}
+         
+         
+         \PY{n}{markers\PYZus{}colors} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+         \PY{k}{for} \PY{n}{lat}\PY{p}{,} \PY{n}{lon}\PY{p}{,} \PY{n}{poi}\PY{p}{,} \PY{n}{cluster} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{nearby\PYZus{}venues}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Latitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{nearby\PYZus{}venues}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Longitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{nearby\PYZus{}venues}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Near by Hospitals}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{kmeans}\PY{o}{.}\PY{n}{labels\PYZus{}}\PY{p}{)}\PY{p}{:}
+             \PY{n}{label} \PY{o}{=} \PY{n}{folium}\PY{o}{.}\PY{n}{Popup}\PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{poi}\PY{p}{)}\PY{p}{,} \PY{n}{parse\PYZus{}html}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+             
+             \PY{n}{folium}\PY{o}{.}\PY{n}{CircleMarker}\PY{p}{(}
+                 \PY{p}{[}\PY{n}{lat}\PY{p}{,} \PY{n}{lon}\PY{p}{]}\PY{p}{,}
+                 \PY{n}{radius}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,}
+                 \PY{n}{popup}\PY{o}{=}\PY{n}{label}\PY{p}{,}
+                 \PY{n}{color}\PY{o}{=}\PY{n}{rainbow}\PY{p}{[}\PY{n}{cluster}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+                 \PY{n}{fill}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}
+                 \PY{n}{fill\PYZus{}color}\PY{o}{=}\PY{n}{rainbow}\PY{p}{[}\PY{n}{cluster}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+                 \PY{n}{fill\PYZus{}opacity}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{)}\PY{o}{.}\PY{n}{add\PYZus{}to}\PY{p}{(}\PY{n}{map\PYZus{}clusters}\PY{p}{)}
+         \PY{n}{map\PYZus{}clusters}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{map\PYZus{}clusters.png}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{map\PYZus{}clusters}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}66}]:} <folium.folium.Map at 0x7f8a1bd8e6a0>
+\end{Verbatim}
+            
+    \subsection{Conclusion}\label{conclusion}
+
+    We Found out 22 Hostpitals in the scope of 2.5 km.
+
+Right off the bat, We sucessfully Optimized the nearby area using
+Clustering Algorithum.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  For Cluster 0 we can say that these hosptials are close to the middle
+  . So we can distribute that beds for critcal paitent.
+\item
+  Similary, For Cluster 1,2 we can designate gentle and typical symtom
+  paitents.
+\end{enumerate}
+
+Notwithstanding accomplish more accuary we can likewise use government
+schools, universities and shut zone places, for example, hotels,
+multi-corp. Structures for all the cities.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} 
+\end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
